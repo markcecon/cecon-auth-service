@@ -1,9 +1,10 @@
 {
     "name": "cecon-auth-service",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "Pacote de serviços angular para autenticação de usuários com o firebase",
     "dependencies": {
         "@angular/fire": "^7.5.0",
+        "@auth0/angular-jwt": "^5.1.2",
         "rxjs": "~7.5.0"
     },
     "main": "dist/index.js",
