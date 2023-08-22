@@ -17,20 +17,17 @@ export class PayloadService {
 
     // #region Constructors (1)
 
-    constructor(
-        private helper: JwtHelperService = new JwtHelperService(),
-    ) { }
+    constructor(private helper: JwtHelperService) { }
 
     // #endregion Constructors (1)
 
     // #region Public Methods (1)
 
-    public processToken(obj: ICredentialToken | null, forceNextpayload: boolean): void {
+    public processToken(obj: ICredentialToken | null): void {
         if (!obj?.token) {
             this.nextPayload(null);
         } else {
             const payload = this.helper.decodeToken(obj.token);
-            console.log('payload processToken', payload);
             payload.token = obj.token;
             this.nextPayload(payload);
         }

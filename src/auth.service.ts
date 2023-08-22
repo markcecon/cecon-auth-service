@@ -84,10 +84,10 @@ export class AuthService {
             if (user) {
                 user.getIdToken().then((token) => {
                     const res = { token };
-                    this.payloadService.processToken(res, false);
+                    this.payloadService.processToken(res);
                 });
             } else {
-                this.payloadService.processToken(null, false);
+                this.payloadService.processToken(null);
             }
         });
         this.isInitialized = true;

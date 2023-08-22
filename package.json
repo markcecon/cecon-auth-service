@@ -1,11 +1,12 @@
 {
     "name": "cecon-auth-service",
-    "version": "1.0.5",
+    "version": "1.0.7",
     "description": "Pacote de serviços angular para autenticação de usuários com o firebase",
-    "dependencies": {
-        "@angular/fire": "^7.5.0",
+    "dependencies": {},
+    "peerDependencies": {
         "@auth0/angular-jwt": "^5.1.2",
-        "rxjs": "~7.5.0"
+        "@angular/fire": ">=7.5.0 <7.9.0",
+        "rxjs": ">=7.5.0 <7.9.0"
     },
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -33,5 +34,8 @@
     "bugs": {
         "url": "https://github.com/markcecon/CeconAuthService/issues"
     },
-    "homepage": "https://github.com/markcecon/CeconAuthService#readme"
+    "homepage": "https://github.com/markcecon/CeconAuthService#readme",
+    "devDependencies": {
+        "ng-packagr": "^16.2.0"
+    }
 }
