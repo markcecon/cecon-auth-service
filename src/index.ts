@@ -1,5 +1,6 @@
 // index.ts
 
+export * from './auth.module';
 export * from './auth.service';
 export * from './dto/create-credential.dto';
 export * from './interfaces/errors.enum';

@@ -376,40 +376,33 @@ export class AuthService {
         }
     }
     private handlerFirebaseError(error: any): never {
-        if (this.isFirebaseError(error)) {
-            switch (true) {
-                case error.code.includes(ErrorCodesEnum.userNotFound):
-                    throw new Error('Conta não encontrada! 9847');
-                case error.code.includes(ErrorCodesEnum.manyAttempts):
-                    throw new Error('Muitas tentativas de login. Tente novamente mais tarde.');
-                case error.code.includes(ErrorCodesEnum.wrongPassword):
-                    throw new Error('Senha incorreta. Verifique e tente novamente.');
-                case error.code.includes(ErrorCodesEnum.notAllowed):
-                    throw new Error('Conta desabilitada. Entre em contato com o suporte.');
-                case error.code.includes(ErrorCodesEnum.popUpClosed):
-                    throw new Error('Janela de login fechada. Tente novamente.');
-                case error.code.includes(ErrorCodesEnum.invalidCode):
-                    throw new Error('Código de verificação inválido.');
-                case error.code.includes(ErrorCodesEnum.missingVerificationCode):
-                    throw new Error('Código de verificação ausente.');
-                case error.code.includes(ErrorCodesEnum.codeExpired):
-                    throw new Error('Código de verificação expirado.');
-                case error.code.includes(ErrorCodesEnum.userNotFound):
-                    throw new Error('Conta não encontrada!');
-                case error.code.includes(ErrorCodesEnum.alreadUse):
-                    throw new Error('Este E-mail já está em uso. Faça o login ou tente registrar com outro E-mail.');
-                case error.code.includes(ErrorCodesEnum.existDifferent):
-                    throw new Error('Este E-mail já está em uso. Faça o login ou tente registrar com outro E-mail.');
-                case error.code.includes(ErrorCodesEnum.userMismatch):
-                    throw new Error('A credencial que você está tentando vincular não corresponde ao usuário atualmente conectado. Faça o login com o usuário correto e tente novamente.');
-                case error.code.includes(ErrorCodesEnum.invalidVerificationId):
-                    throw new Error('Código de verificação inválido.');
-                default:
-                    throw error;
+        const errorCode = error.code || error.message;  // Usando o code, se estiver presente, senão usa a message.
+    
+        const errorsMap = {
+            [ErrorCodesEnum.userNotFound]: 'Conta não encontrada! 9847',
+            [ErrorCodesEnum.manyAttempts]: 'Muitas tentativas de login. Tente novamente mais tarde.',
+            [ErrorCodesEnum.wrongPassword]: 'Senha incorreta. Verifique e tente novamente.',
+            [ErrorCodesEnum.notAllowed]: 'Conta desabilitada. Entre em contato com o suporte.',
+            [ErrorCodesEnum.popUpClosed]: 'Janela de login fechada. Tente novamente.',
+            [ErrorCodesEnum.invalidCode]: 'Código de verificação inválido.',
+            [ErrorCodesEnum.missingVerificationCode]: 'Código de verificação ausente.',
+            [ErrorCodesEnum.codeExpired]: 'Código de verificação expirado.',
+            [ErrorCodesEnum.alreadUse]: 'Este E-mail já está em uso. Faça o login ou tente registrar com outro E-mail.',
+            [ErrorCodesEnum.existDifferent]: 'Este E-mail já está em uso. Faça o login ou tente registrar com outro E-mail.',
+            [ErrorCodesEnum.userMismatch]: 'A credencial que você está tentando vincular não corresponde ao usuário atualmente conectado. Faça o login com o usuário correto e tente novamente.',
+            [ErrorCodesEnum.invalidVerificationId]: 'Código de verificação inválido.',
+            // Adicione outros erros conforme necessário.
+        };
+    
+        // Verifica se é um erro conhecido e lança a mensagem correspondente.
+        for (const key in errorsMap) {
+            if (errorCode.includes(key)) {
+                throw new Error(errorsMap[key]);
             }
-        } else {
-            throw error;
         }
+    
+        // Se chegou até aqui, lança o erro original, pois não é um erro tratado.
+        throw error;
     }
     // #endregion Private Methods (3)
 }

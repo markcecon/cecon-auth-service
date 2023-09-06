@@ -1,12 +1,13 @@
 {
     "compilerOptions": {
-      "module": "commonjs",
-      "target": "es5",
-      "declaration": true,
-      "experimentalDecorators": true,
-      "outDir": "./dist"
+        "baseUrl": "./",
+        "module": "commonjs",
+        "target": "es5",
+        "declaration": true,
+        "experimentalDecorators": true,
+        "outDir": "./dist"
     },
     "include": [
-      "src/**/*"
+        "src/**/*"
     ]
-  }
+}
